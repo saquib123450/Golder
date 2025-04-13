@@ -11,6 +11,7 @@ let chartInstances = {};
 let currentPage = "dashboard";
 let currentTheme = "dark";
 let isSidebarOpen = false;
+let countdownInterval = null;
 
 // DOM Elements
 const sidebar = document.querySelector('.sidebar');
@@ -205,17 +206,19 @@ async function fetchCurrentGameIssue() {
 
 function updateTimer(data) {
     const periodNumber = document.getElementById('period-number');
+    if (periodNumber)
     periodNumber.textContent = data.issueNumber;
 
     const endTime = new Date(data.endTime).getTime();
-    const interval = setInterval(() => {
+    clearInterval(countdownInterval);
+    countdownInterval = setInterval(() => {
         const now = new Date().getTime();
         const distance = endTime - now;
 
         if (distance <= 0) {
             clearInterval(interval);
-            document.getElementById('minutes').textContent = "00";
-            document.getElementById('seconds').textContent = "00";
+            if (document.getElementById('minutes')) document.getElementById('minutes').textContent = "00";
+            if (document.getElementById('seconds')) document.getElementById('seconds').textContent = "00";
             fetchCurrentGameIssue();
         } else {
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
@@ -1278,4 +1281,4 @@ function clearCache() {
 function checkForUpdates() {
     alert('AlgoPredX is up to date!');
     // In a real app, this would check for updates from a server
-}
+        }
