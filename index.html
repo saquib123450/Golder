@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>AlgoPredX S2</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoPredX - Advanced Prediction System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+    <div class="sidebar">
+        <div class="logo">
+            <span class="logo-icon">🔮</span>
+            <span class="logo-text">AlgoPredX S2</span>
+        </div>
+        <nav class="menu">
+            <ul>
+                <li class="active" data-page="dashboard">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </li>
+                <li data-page="game">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Game Window</span>
+                </li>
+                <li data-page="history">
+                    <i class="fas fa-history"></i>
+                    <span>History</span>
+                </li>
+                <li data-page="analysis">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analysis & Trends</span>
+                </li>
+                <li data-page="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </li>
+                <li data-page="about">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About Us</span>
+                </li>
+            </ul>
+        </nav>
+        <div class="theme-toggle">
+            <i class="fas fa-moon"></i>
+            <span>Dark Mode</span>
+            <div class="toggle-switch">
+                <input type="checkbox" id="theme-toggle">
+                <label for="theme-toggle"></label>
+            </div>
+        </div>
+        <div class="developer-credit">
+            <span>Developed by</span>
+            <a href="https://t.me/Aneaxity" target="_blank">ANXT</a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <header>
+            <div class="header-left">
+                <button class="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 class="page-title">Dashboard</h1>
+            </div>
+            <div class="header-right">
+                <div class="stats">
+                    <div class="stat-card">
+                        <span class="stat-value win-stat">0</span>
+                        <span class="stat-label">Wins</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value loss-stat">0</span>
+                        <span class="stat-label">Losses</span>
+                    </div>
+                    <div class="stat-card">
+                        <span class="stat-value win-rate">0%</span>
+                        <span class="stat-label">Win Rate</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <div class="page-content" id="dashboard-page">
+            <div class="current-game">
+                <div class="game-header">
+                    <h2>Current Game</h2>
+                    <div class="timer">
+                        <span id="period-number">Loading...</span>
+                        <div class="time-display">
+                            <span id="minutes">00</span>:<span id="seconds">00</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="prediction-display">
+                    <div class="prediction-card">
+                        <h3>Next Prediction</h3>
+                        <div class="prediction-value" id="next-prediction">Analyzing...</div>
+                        <div class="confidence-meter">
+                            <div class="confidence-fill" style="width: 0%"></div>
+                        </div>
+                        <span class="confidence-text">Confidence: <span id="confidence-value">0%</span></span>
+                    </div>
+                    <div class="prediction-logic">
+                        <h4>Active Logic:</h4>
+                        <p id="active-logic">Initializing prediction engine...</p>
+                    </div>
+                </div>
+                <button class="export-btn" id="export-current">
+                    <i class="fas fa-download"></i> Export Prediction
+                </button>
+            </div>
+
+            <div class="stats-section">
+                <div class="section-header">
+                    <h2>Performance Analytics</h2>
+                    <div class="time-filter">
+                        <select id="stats-filter">
+                            <option value="24h">Last 24h</option>
+                            <option value="7d">Last 7 days</option>
+                            <option value="30d">Last 30 days</option>
+                            <option value="all" selected>All Time</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="analytics-cards">
+                    <div class="analytics-card">
+                        <div class="analytics-icon success">
+                            <i class="fas fa-trophy"></i>
+                        </div>
+                        <div class="analytics-info">
+                            <span class="analytics-value streak">0</span>
+                            <span class="analytics-label">Current Win Streak</span>
+                        </div>
+                    </div>
+                    <div class="analytics-card">
+                        <div class="analytics-icon warning">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <div class="analytics-info">
+                            <span class="analytics-value hot-streak">0</span>
+                            <span class="analytics-label">Hot Streak</span>
+                        </div>
+                    </div>
+                    <div class="analytics-card">
+                        <div class="analytics-icon danger">
+                            <i class="fas fa-skull"></i>
+                        </div>
+                        <div class="analytics-info">
+                            <span class="analytics-value cold-streak">0</span>
+                            <span class="analytics-label">Cold Streak</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="history-section">
+                <div class="section-header">
+                    <h2>Recent Results</h2>
+                    <button class="export-btn" id="export-history">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
+                <div class="history-table-container">
+                    <table class="history-table">
+                        <thead>
+                            <tr>
+                                <th>Period</th>
+                                <th>Number</th>
+                                <th>Size</th>
+                                <th>Color</th>
+                                <th>Result</th>
+                            </tr>
+                        </thead>
+                        <tbody id="history-list">
+                            <!-- Filled by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content hidden" id="game-page">
+            <div class="game-embed-container">
+                <iframe src="https://www.tirangagame.top/#/register?invitationCode=738143353022" frameborder="0"></iframe>
+            </div>
+            <div class="game-prediction-banner">
+                <div class="prediction-banner-content">
+                    <span>Current Prediction:</span>
+                    <span class="prediction-value" id="game-page-prediction">Loading...</span>
+                    <span class="confidence-badge" id="game-page-confidence">0% confidence</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content hidden" id="history-page">
+            <div class="section-header">
+                <h2>Full History</h2>
+                <div class="history-controls">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search period..." id="history-search">
+                    </div>
+                    <button class="export-btn" id="export-full-history">
+                        <i class="fas fa-download"></i> Export All
+                    </button>
+                </div>
+            </div>
+            <div class="full-history-table-container">
+                <table class="full-history-table">
+                    <thead>
+                        <tr>
+                            <th>Period</th>
+                            <th>Number</th>
+                            <th>Size</th>
+                            <th>Color</th>
+                            <th>Prediction</th>
+                            <th>Result</th>
+                            <th>Logic Used</th>
+                        </tr>
+                    </thead>
+                    <tbody id="full-history-list">
+                        <!-- Filled by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination">
+                <button class="page-btn" id="prev-page"><i class="fas fa-chevron-left"></i></button>
+                <span class="page-info">Page 1 of 1</span>
+                <button class="page-btn" id="next-page"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+
+        <div class="page-content hidden" id="analysis-page">
+            <div class="analysis-header">
+                <h2>Trend Analysis & Pattern Detection</h2>
+                <div class="analysis-tabs">
+                    <button class="analysis-tab active" data-tab="size-trends">Size Trends</button>
+                    <button class="analysis-tab" data-tab="color-trends">Color Trends</button>
+                    <button class="analysis-tab" data-tab="pattern-detection">Pattern Detection</button>
+                    <button class="analysis-tab" data-tab="logic-performance">Logic Performance</button>
+                </div>
+            </div>
+            
+            <div class="analysis-content">
+                <div class="analysis-tab-content active" id="size-trends-tab">
+                    <div class="chart-container">
+                        <canvas id="size-trend-chart"></canvas>
+                    </div>
+                    <div class="trend-analysis">
+                        <h3>Size Trend Analysis</h3>
+                        <p id="size-analysis-text">Loading size trend analysis...</p>
+                    </div>
+                </div>
+                
+                <div class="analysis-tab-content" id="color-trends-tab">
+                    <div class="chart-container">
+                        <canvas id="color-trend-chart"></canvas>
+                    </div>
+                    <div class="trend-analysis">
+                        <h3>Color Trend Analysis</h3>
+                        <p id="color-analysis-text">Loading color trend analysis...</p>
+                    </div>
+                </div>
+                
+                <div class="analysis-tab-content" id="pattern-detection-tab">
+                    <div class="pattern-detection-container">
+                        <div class="pattern-grid" id="pattern-grid">
+                            <!-- Filled by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="trend-analysis">
+                        <h3>Detected Patterns</h3>
+                        <p id="pattern-analysis-text">Analyzing recent results for patterns...</p>
+                    </div>
+                </div>
+                
+                <div class="analysis-tab-content" id="logic-performance-tab">
+                    <div class="chart-container">
+                        <canvas id="logic-performance-chart"></canvas>
+                    </div>
+                    <div class="trend-analysis">
+                        <h3>Logic Performance Analysis</h3>
+                        <p id="logic-analysis-text">Evaluating prediction logic performance...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-content hidden" id="settings-page">
+            <div class="settings-section">
+                <h2>Preferences</h2>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>Theme</h3>
+                        <p>Choose between light and dark mode</p>
+                    </div>
+                    <div class="setting-control">
+                        <label class="switch">
+                            <input type="checkbox" id="theme-pref-toggle">
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>Notifications</h3>
+                        <p>Enable prediction alerts</p>
+                    </div>
+                    <div class="setting-control">
+                        <label class="switch">
+                            <input type="checkbox" id="notifications-toggle" checked>
+                            <span class="slider round"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>Risk Level</h3>
+                        <p>Adjust prediction aggressiveness</p>
+                    </div>
+                    <div class="setting-control">
+                        <select id="risk-level">
+                            <option value="low">Low (Conservative)</option>
+                            <option value="medium" selected>Medium (Balanced)</option>
+                            <option value="high">High (Aggressive)</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="setting-item">
+                    <div class="setting-info">
+                        <h3>Default Export Format</h3>
+                        <p>Choose your preferred export format</p>
+                    </div>
+                    <div class="setting-control">
+                        <select id="export-format">
+                            <option value="csv" selected>CSV</option>
+                            <option value="json">JSON</option>
+                            <option value="excel">Excel</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="settings-section">
+                <h2>System</h2>
+                <button class="settings-btn" id="clear-cache">
+                    <i class="fas fa-broom"></i> Clear Cache
+                </button>
+                <button class="settings-btn" id="reset-stats">
+                    <i class="fas fa-redo"></i> Reset Statistics
+                </button>
+                <button class="settings-btn" id="check-updates">
+                    <i class="fas fa-sync-alt"></i> Check for Updates
+                </button>
+            </div>
+        </div>
+
+        <div class="page-content hidden" id="about-page">
+            <div class="about-section">
+                <div class="about-header">
+                    <div class="about-logo">🔮</div>
+                    <h2>AlgoPredX</h2>
+                    <p class="version">v2.1.0</p>
+                </div>
+                
+                <div class="about-content">
+                    <h3>Advanced Prediction System</h3>
+                    <p>AlgoPredX is a sophisticated prediction engine that utilizes 25+ advanced algorithms, machine learning techniques, and pattern recognition to deliver highly accurate predictions for gaming outcomes.</p>
+                    
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>AI-Powered Analysis</h4>
+                                <p>Our system continuously learns from historical data to improve prediction accuracy.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Real-Time Trends</h4>
+                                <p>Instant analysis of current trends and patterns for up-to-the-minute predictions.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-icon">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="feature-text">
+                                <h4>Risk Management</h4>
+                                <p>Built-in safeguards to minimize losses during unpredictable streaks.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-section">
+                    <h3>Contact Developer</h3>
+                    <p>For support, feedback, or inquiries:</p>
+                    <a href="https://t.me/Devdarq" class="contact-btn" target="_blank">
+                        <i class="fab fa-telegram"></i> Message on Telegram
+                    </a>
+                </div>
+                
+                <div class="disclaimer">
+                    <p><strong>Disclaimer:</strong> AlgoPredX is a prediction tool and does not guarantee results. Use at your own discretion. The developer is not responsible for any losses incurred.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
